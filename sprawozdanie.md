@@ -19,11 +19,8 @@ Tabela zawiera przykładowe dane notowań indeksu WIG20.
 ### **3. Konstrukcja i analiza wskaźnika MACD**
 
 Wskaźnik MACD obliczany przy użyciu wykładniczej średniej kroczącej **EMA** (skrót od ang. *Exponentail Moving Avarage*) obliczanej według wzoru:
-$$
-EMA_N(i) = \alpha \cdot x_i + (1-\alpha) \cdot EMA_N(i - 1)
-\tag{1}
-
-$$
+$$ EMA_N(i) = \alpha \cdot x_i + (1-\alpha) \cdot EMA_N(i - 1)
+\tag{1}$$
 gdzie: 
 - $x_i$ - cena zamknięcia w $i$-tym okresie
 - $N$ - liczba okresów
@@ -60,4 +57,28 @@ SIGNAL = EMA_9 (MACD)
 \tag{4}
 $$
 
+### **4. Implementacja**
+Implementacja wskaźnika **MACD** w języku Python została przeprowadzona przy użyciu biblioteki `pandas` oraz `numpy`. Poniżej przedstawiono kod funkcji, która oblicza wartości **MACD** oraz **SIGNAL** na podstawie danych wejściowych.
 
+Impelemntacja funkcji obliczającej wartość *EMA* - wykładniczej średniej kroczącej:
+```python
+def calulate_ema(data, N):
+    alpha = 2/(N+1)
+    EMA = [data[0]]
+    for i in range(N, len(data)):
+        EMA.append(alpha * data[i] + (1 - alpha) * EMA[-1])
+    return EMA
+```
+
+Implementacja funkcji obliczających wartość **MACD** oraz **SIGNAL**:
+```python
+def calculate_macd(data, N1=12, N2=26):
+    EMA1 = calulate_ema(data, N1)
+    EMA2 = calulate_ema(data, N2)
+    MACD = np.array(EMA1) - np.array(EMA2)
+    return MACD
+```
+```python
+def calculate_signal(data, N=9):
+    return calulate_ema(data, N)
+```
