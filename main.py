@@ -46,10 +46,17 @@ def calculate_ema(_data, _n):
 # Extract the 'Zamkniecie' column
 closing_prices = data['Zamkniecie'].values
 
-# Calculate the EMA
-calculations = calculate_ema(closing_prices, 26)
+# Calculate the EMA_26
+ema26 = calculate_ema(closing_prices, 26)
+
+# Calculate the EMA_12
+ema12 = calculate_ema(closing_prices, 12)
 
 # Print the EMA values as regular floats
-for value in calculations:
+for value in ema26:
     print(float(value))
-print(len(calculations))
+print(len(ema26))
+
+for value in ema12:
+    print(float(value))
+print(len(ema12))

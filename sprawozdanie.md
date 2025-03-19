@@ -1,29 +1,63 @@
-W przypadku **adresowania indeksowego** adres argumentu określony jest przez sumę zawartości pola adresowego rozkazu i rejestru indeksowego.
+Marta Kociszewska 198143 
+### **1. Wstęp**
 
-Pole adresowe to nie musi być konkretna liczba, może być wyrażeniem
+Wskaźnik **MACD** (skrót od ang. *Moving Average Convergence/Divergence*) dosłownie oznacza to średnią kroczącą konwergencję/dywergencję, to narzędzie analizy technicznej, wykorzystywane do identyfikowania trendów rynkowych i sygnałów kupna lub sprzedaży. Jest jednym z najpopularniejszych narzędzi w analizie technicznej instrumentów finansowych. Polega na obserwacji dynamiki cen - różnicy między średnią krótkoterminową a długoterminową - co pozwala na wykrycie momentów, w których ruch cenowy zyskuje na sile lub spadnie.
 
-![[Zrzut ekranu 2025-02-02 122411.png]]
+----
+### **2. Dane testowe**
 
-> [!example] Przykład
-```
-add EAX, [EBX + 360]
-```
+Dane, które zostały wykorzystane w analizie, pochodzą z historycznych notowań indeksu WIG20, obejmujących około 1100 notowań w okresie od 2020-10-01 do 2025-03-12. Indeks WIG20 jest jednym z najważniejszych wskaźników giełdowych w Polsce, reprezentującym 20 największych i najbardziej płynnych spółek na warszawskiej giełdzie. Dane obejmują zmiany cen zamknięcia, wartości indeksu oraz inne istotne parametry, takie jak wolumen obrotu i zmienność rynkowa, które mogą być wykorzystane do analizy trendów rynkowych, badania zmienności, czy też testowania różnych strategii inwestycyjnych. 
 
-> [!info] Symbolicznie
-> $regs[R4] \leftarrow regs[R4]+ Mem [Regs[R1] + 360]$
+Tabela zawiera przykładowe dane notowań indeksu WIG20.
 
-> [!tip]
-> W architekturze x86 rolę rejestru indeksowego może pełnić dowolny 32-bitowy rejestr ogólnego przeznaczenia: EAX, EBX, . . .
+| Data       | Otwarcie | Najwyzszy | Najnizszy | Zamkniecie | Wolumen  |
+| ---------- | -------- | --------- | --------- | ---------- | -------- |
+| 2020-10-01 | 1719.55  | 1723.85   | 1697.54   | 1694.18    | 22310007 |
+| 2020-10-02 | 1690.04  | 1704.58   | 1675.2    | 1697.39    | 18298699 |
+
+------
+### **3. Konstrukcja i analiza wskaźnika MACD**
+
+Wskaźnik MACD obliczany przy użyciu wykładniczej średniej kroczącej **EMA** (skrót od ang. *Exponentail Moving Avarage*) obliczanej według wzoru:
+$$
+EMA_N(i) = \alpha \cdot x_i + (1-\alpha) \cdot EMA_N(i - 1)
+\tag{1}
+
+$$
+gdzie: 
+- $x_i$ - cena zamknięcia w $i$-tym okresie
+- $N$ - liczba okresów
+- $\alpha$ - współczynnik wygładzający: $\alpha = \frac{2}{N+1}$
+
+Równanie $(1)$ można przekształcić do postaci jawnej:
+$$
+EMA_N(i) = 
+\frac
+{x_1 + (1-\alpha)x_{i-1} + (1-\alpha)^2 x_{i-2} + ... + (1-\alpha)^N x_{i-N}}
+{1+ (1 - \alpha) + (1 - \alpha)^2 + ... + (1 - \alpha)^N}
+\tag{2}
+$$
+Jest to forma średniej ważonej, w której wagi dla wcześniejszych cen zmniejszają się w sposób wykładniczy. Tego rodzaju średnia szybciej reaguje na zmiany cen aktywa, uwzględniając jednocześnie wszystkie wcześniejsze ceny, przy jednoczesnym stopniowym osłabianiu ich wpływu.
+
+Z obu przedstawionych równań wynika, że wartość **EMA** dla $i$-tego okresu zależy zarówno od bieżącej ceny zamknięcia $x_i$ jak i od wszystkich wcześniejszych cen. W obliczeniach **EMA** pojawia się problem ustalenia wartości początkowej. Z równania (2) wynika, że 26-dniową EMA można obliczyć już po drugiej cenie, co nie odpowiada intuicyjnemu rozumieniu średniej 26-dniowej, ponieważ pomija pierwsze dni. Przy założeniu, że $EMA_N(0)=x_0$ obliczenia mogą prowadzić do oscylacji, które źle odwzorowują zmienność cen. Aby poprawić dokładność początkowych wartości, obliczenia zaczyna się od $i=N+1$, gdzie wartość $EMA_N(N)$ to średnia z pierwszych $N$ cen. Należy zaznaczyć, że bez względu na metodę, wyniki **EMA** dla kolejnych okresów będą zbieżne, a stabilizacja następuje zazwyczaj po $N$-tym, choć preferowane jest $2N$-tym okresie.
+##### **Krzywa MACD**
+Krzywa **MACD** wyznaczana jest przez różnicę między szybką a wolną średnią kroczącą. W popularnym podejściu średnie przyjmują wartość:
+- $EMA_{12}$ - 12-okresowa wykładnicza średnia krocząca,
+- $EMA{26}$ - 26-okresowa wykładnicza średnia krocząca.
+
+Wówczas krzywą **MACD** można obliczyć według wzoru:
+$$
+MACD = EMA_{12} - EMA_{26}
+\tag{3}
+$$
+
+##### **Krzywa SIGNAL**
+W wyżej wspomnianym podejściu krzywa **SIGNAL** wyznaczana jest jako 9-okresowa wykładnicza średnia krocząca obliczana na podstawie wartości **MACD**.
+
+Krzywą można obliczyć według wzoru:
+$$
+SIGNAL = EMA_9 (MACD)
+\tag{4}
+$$
 
 
-W przypadku szczególnym pole adresowe może być pominięte, co oznacza, że
-adres argumentu określony jest wyłącznie przez zawartość rejestru indeksowego. W literaturze tego rodzaju adresowanie określane jest jako adresowanie za pomocą wskaźników
-
-![[Zrzut ekranu 2025-02-02 122822.png]]
-> [!example] Przykład
-```
-add EAX, [ESI]
-```
-
-> [!info] Symbolicznie
-> $regs[R4] \leftarrow regs[R4]+ Mem [Regs[R1]]$
