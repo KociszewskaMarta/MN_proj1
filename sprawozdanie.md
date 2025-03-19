@@ -8,6 +8,8 @@ Wskaźnik **MACD** (skrót od ang. *Moving Average Convergence/Divergence*) dos�
 
 Dane, które zostały wykorzystane w analizie, pochodzą z historycznych notowań indeksu WIG20, obejmujących około 1100 notowań w okresie od 2020-10-01 do 2025-03-12. Indeks WIG20 jest jednym z najważniejszych wskaźników giełdowych w Polsce, reprezentującym 20 największych i najbardziej płynnych spółek na warszawskiej giełdzie. Dane obejmują zmiany cen zamknięcia, wartości indeksu oraz inne istotne parametry, takie jak wolumen obrotu i zmienność rynkowa, które mogą być wykorzystane do analizy trendów rynkowych, badania zmienności, czy też testowania różnych strategii inwestycyjnych. 
 
+Obliczenia będą oparte na datach i cenach zamknięcia.
+
 Tabela zawiera przykładowe dane notowań indeksu WIG20.
 
 | Data       | Otwarcie | Najwyzszy | Najnizszy | Zamkniecie | Wolumen  |
@@ -15,6 +17,12 @@ Tabela zawiera przykładowe dane notowań indeksu WIG20.
 | 2020-10-01 | 1719.55  | 1723.85   | 1697.54   | 1694.18    | 22310007 |
 | 2020-10-02 | 1690.04  | 1704.58   | 1675.2    | 1697.39    | 18298699 |
 
+Dane zostały pobrane z serwisu stooq.pl, który oferuje darmowy dostęp do historycznych notowań giełdowych, indeksów, walut, czy towarów.
+
+Wykres 2.1 przedstawia zmiany cen zamknięcia w okresie od 2020-10-01 do 2025-03-12.
+
+<img alt="Closing Prices" src="graphs/closing_prices.png"/></img>
+<small>Wykres 2.1</small>
 ------
 ### **3. Konstrukcja i analiza wskaźnika MACD**
 

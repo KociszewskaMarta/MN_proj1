@@ -1,6 +1,16 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
+
+def save_plot(filename):
+    """
+    Save the plot as a PNG file
+    Parameters
+    ----------
+    filename : str, the filename to save the plot as
+    """
+    plt.savefig(filename)
 
 def extract_data():
     """
@@ -18,7 +28,7 @@ def extract_data():
     return data_from_file
 
 data = extract_data()
-print(data) # Print the data
+print(data) # Print the datas
 
 def plot_data(data):
     plt.figure(figsize=(28, 7))
@@ -27,6 +37,7 @@ def plot_data(data):
     plt.ylabel('Value')
     plt.title('Closing Prices')
     plt.legend()
+    # save_plot('graphs/closing_prices.png')
     plt.show()
 
 plot_data(data)
