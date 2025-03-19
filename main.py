@@ -20,6 +20,17 @@ def extract_data():
 data = extract_data()
 print(data) # Print the data
 
+def plot_data(data):
+    plt.figure(figsize=(28, 7))
+    plt.plot(data['Zamkniecie'], label='Closing Prices', color='black')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.title('Closing Prices')
+    plt.legend()
+    plt.show()
+
+plot_data(data)
+
 def calculate_ema(_data, _n):
     """
     Calculate the Exponential Moving Average (EMA) of a given data set for the last n periods
@@ -159,15 +170,65 @@ def cross(macd, signal):
             cross_points.append((i, macd[i]))
     return cross_points
 
-def plot_cross_points(data, cross_points):
+def plot_macd_signal_and_cross_points(macd, signal, cross_points):
     plt.figure(figsize=(28, 7))
-    plt.plot(data, label='Data', color='black')
-    plt.scatter([point[0] for point in cross_points], [point[1] for point in cross_points], color='red', marker='o', label='Cross Points')
+    plt.plot(macd, label='MACD', color='red')
+    plt.plot(signal, label='Signal Line', color='blue')
+    plt.scatter([point[0] for point in cross_points], [point[1] for point in cross_points], color='green', marker='o', label='Cross Points')
     plt.xlabel('Time')
     plt.ylabel('Value')
-    plt.title('Cross Points')
+    plt.title('MACD, Signal Line, and Cross Points')
     plt.legend()
     plt.show()
+
+def calculate_buy_sell_signals(macd, signal):
+    """
+    Calculate the buy and sell signals based on the MACD and Signal Line
+    Buy and Sell signals are calculated as follows:
+    - Buy Signal: MACD crosses above the Signal Line
+    - Sell Signal: MACD crosses below the Signal Line
+    Parameters
+    ----------
+    macd : numpy array of MACD values
+    signal : numpy array of Signal Line values
+
+    Returns
+    -------
+    buy_signals : list of tuples containing the index and value of the buy signals
+    sell_signals : list of tuples containing the index and value of the sell signals
+    """
+    buy_signals = []
+    sell_signals = []
+    for i in range(1, len(macd)):
+        if macd[i] > signal[i] and macd[i - 1] < signal[i - 1]:
+            buy_signals.append((i, macd[i]))
+        elif macd[i] < signal[i] and macd[i - 1] > signal[i - 1]:
+            sell_signals.append((i, macd[i]))
+    return buy_signals, sell_signals
+
+def plotting_buy_sell_signals(macd, signal, buy_signals, sell_signals):
+    """
+    Plot the MACD, Signal Line, Buy Signals, and Sell Signals
+    Parameters
+    ----------
+    macd : numpy array of MACD values
+    signal : numpy array of Signal Line values
+    buy_signals : list of tuples containing the index and value of the buy signals
+    sell_signals : list of tuples containing the index and value of the sell signals
+    """
+    plt.figure(figsize=(28, 7))
+    plt.plot(macd, label='MACD', color='red', linewidth=1, linestyle='--')
+    plt.plot(signal, label='Signal Line', color='blue', linewidth=1, linestyle='--')
+    plt.scatter([point[0] for point in buy_signals], [point[1] for point in buy_signals], color='green', marker='o',
+                label='Buy Signals')
+    plt.scatter([point[0] for point in sell_signals], [point[1] for point in sell_signals], color='yellow', marker='o',
+                label='Sell Signals')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.title('MACD, Signal Line, and Cross Points')
+    plt.legend()
+    plt.show()
+
 
 # Extract the 'Zamkniecie' column
 closing_prices = data['Zamkniecie'].values
@@ -207,19 +268,26 @@ print("Length of signal",len(signal))
 
 macd=macd[:len(signal)]
 
+# Calculate the cross points
+cross_points = cross(macd, signal)
+
 # plot the data
 plot_macd_and_signal(macd, signal)
 
 # Plot the histogram on a different graph
 plot_histogram(macd, signal)
 
-# Calculate the cross points
-cross_points = cross(macd, signal)
+# Plot the MACD, Signal Line, and Cross Points
+plot_macd_signal_and_cross_points(macd, signal, cross_points)
 
-# Print the cross points
-print("Cross points:")
-for point in cross_points:
-    print(point)
+# Calculate the buy and sell signals
+buy_signals, sell_signals = calculate_buy_sell_signals(macd, signal)
+
+# Plot the MACD, Signal Line, Buy Signals, and Sell Signals
+plotting_buy_sell_signals(macd, signal, buy_signals, sell_signals)
+
+
+
 
 
 
