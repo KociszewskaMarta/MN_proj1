@@ -8,7 +8,6 @@ closing_prices = data.Zamkniecie;
 [macdLine, signalLine] = macd(closing_prices);
 
 % Plot the MACD indicator
-% Create figure with a custom size
 figure('Units', 'pixels', 'Position', [100, 100, 1200, 400]); % 3200x400 pixels (wider)
 plot(macdLine, 'b', 'LineWidth', 1); hold on;
 plot(signalLine, 'r', 'LineWidth', 1);
