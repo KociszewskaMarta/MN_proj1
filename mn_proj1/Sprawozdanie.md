@@ -109,8 +109,10 @@ Wykres 3.4 przedstawia wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-0
 
 Gdy **MACD** przecina linię **SIGNAL** od dołu, jest to uznawane za **sygnał kupna**, sugerujący, że trend wzrostowy może nabierać na sile. Natomiast gdy **MACD** przecina linię **SIGNAL** od góry, oznacza to **sygnał sprzedaży**, co może wskazywać na osłabienie trendu wzrostowego i potencjalny ruch spadkowy.
 
-Wskazane są momenty kupna, kiedy krzywa **SIGNAL** przecina krzywą **MACD** od dołu oraz sprzedaży, kiedy krzywa **SIGNAL** przecina krzywą **MACD** od góry.  
-Sygnał kupna został oznaczony kolorem zielonym, sygnał sprzedaży - kolorem żółtym.  
+Wskazane są momenty kupna, kiedy krzywa **MACD** przecina krzywą **SIGNAL** od dołu oraz sprzedaży, kiedy krzywa **MACD** przecina krzywą **SIGNAL** od góry.  
+Sygnał kupna został oznaczony kolorem zielonym, sygnał sprzedaży - kolorem czerwonym.  
+
+
 
 ![[macd_signal_buy_sell_signals.png]]
 <small>Wykres 3.5</small>  

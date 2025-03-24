@@ -1,7 +1,9 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import os
+import matplotlib.dates as mdates
+
+# TODO change plots so they have dates on x-axis
 
 def save_plot(filename):
     """
@@ -22,6 +24,9 @@ def extract_data():
     # Load the CSV file
     df = pd.read_csv('wig20_d.csv')
 
+    # Convert the 'Data' column to datetime format
+    df['Data'] = pd.to_datetime(df['Data'])
+
     # Extract the 'Data' and 'Zamkniecie' columns
     data_from_file = df[['Data', 'Zamkniecie']]
 
@@ -29,7 +34,15 @@ def extract_data():
 
 def plot_data(data):
     plt.figure(figsize=(28, 7))
-    plt.plot(data['Zamkniecie'], label='Closing Prices', color='black')
+    plt.plot(data['Data'], data['Zamkniecie'], label='Closing Prices', color='black')
+
+    # Set the x-axis to display dates only at the start of each month
+    plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+
+    # Rotate the x-axis labels to be vertical
+    plt.xticks(rotation=90)
+
     plt.xlabel('Time')
     plt.ylabel('Value')
     plt.title('Closing Prices')
@@ -227,9 +240,9 @@ def plotting_buy_sell_signals(macd, signal, buy_signals, sell_signals):
     plt.figure(figsize=(28, 7))
     plt.plot(macd, label='MACD', color='blue', linewidth=1, linestyle='--')
     plt.plot(signal, label='Signal Line', color='red', linewidth=1, linestyle='--')
-    plt.scatter([point[0] for point in buy_signals], [point[1] for point in buy_signals], color='green', marker='o',
+    plt.scatter([point[0] for point in buy_signals], [point[1] for point in buy_signals], color='green', marker='^',
                 label='Buy Signals')
-    plt.scatter([point[0] for point in sell_signals], [point[1] for point in sell_signals], color='yellow', marker='o',
+    plt.scatter([point[0] for point in sell_signals], [point[1] for point in sell_signals], color='red', marker='v',
                 label='Sell Signals')
     plt.xlabel('Time')
     plt.ylabel('Value')
@@ -279,6 +292,7 @@ for value in signal:
     print(float(value))
 print("Length of signal",len(signal))
 
+# TODO find a correct way to make macd and signal the same length
 # to make macd and signal the same length
 macd = macd[len(macd) - len(signal):]
 
