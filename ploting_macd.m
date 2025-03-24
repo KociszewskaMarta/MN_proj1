@@ -1,8 +1,8 @@
 % Load CSV file
-data = readtable('wig20_d.csv'); % Replace with your actual file name
+data = readtable('wig20_d.csv');
 
 % Extract closing prices
-closing_prices = data.Zamkniecie; % Adjust column name if different
+closing_prices = data.Zamkniecie;
 
 % Compute MACD and Signal Line
 [macdLine, signalLine] = macd(closing_prices);
