@@ -65,8 +65,37 @@ SIGNAL = EMA_9 (MACD)
 \tag{4}
 $$
 
+##### **Interpretacja wskaźnika MACD**
+
+Wskaźnik **MACD** jest używany do identyfikacji trendów rynkowych, sygnałów kupna i sprzedaży oraz do analizy zmienności cen. Podstawowe zasady interpretacji wskaźnika **MACD**:
+- **Krzywa MACD** powyżej zera - sygnał wzrostowy, poniżej zera - sygnał spadkowy,
+- **Krzywa SIGNAL** przecina **MACD** od dołu - sygnał kupna, od góry - sygnał sprzedaży,
+- **Krzywa MACD** i **SIGNAL** powyżej zera - sygnał wzrostowy, poniżej zera - sygnał spadkowy,
+
+Warto zaznaczyć, że wskaźnik **MACD** nie jest wskaźnikiem samym w sobie, ale jedynie narzędziem, które należy interpretować w kontekście innych wskaźników i analizy rynkowej. 
+Wskaźnik **MACD** jest jednym z wielu narzędzi analizy technicznej, które mogą być wykorzystane do analizy rynku finansowego.
+
+Wykres 3.1 przedstawia wartości **MACD** oraz **SIGNAL** dla indeksu WIG20 w okresie od 2020-10-01 do 2025-03-12. 
+<img alt="macd_and_signal" src="graphs/macd_and_signal.png"/></img>
+<small>Wykres 3.1</small>
+
+Wykres 3.3 przedstawia wartści **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31, wraz z zaznaczonymi momentami, w których krzywa **SIGNAL** przecina krzywą **MACD**.
+<img alt="macd_and_signal" src="graphs/macd_signal_cross_points.png"/></img>
+<small>Wykres 3.3</small>
+
+Wykres 3.3 przedstawia histogram wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31.
+<img alt="macd_and_signal" src="graphs/histogram.png"/></img>
+<small>Wykres 3.3</small>
+
+Wykres 3.4 przedstawia wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31, wraz z zaznaczonymi momentami, w których krzywa **MACD** przecina się z krzywą **SIGNAL**. 
+Wskazane są momenty kupna, kiedy krzywa **SIGNAL** przecina krzywą **MACD** od dołu oraz sprzedaży, kiedy krzywa **SIGNAL** przecina krzywą **MACD** od góry.
+Sygnał kupna został oznaczony kolorem zielonym, sygnał sprzedaży - kolorem żółtym.
+<img alt="macd_and_signal" src="graphs/macd_signal_buy_sell_signals.png"/></img>
+<small>Wykres 3.4</small>
+
 ### **4. Implementacja**
-Implementacja wskaźnika **MACD** w języku Python została przeprowadzona przy użyciu biblioteki `pandas` oraz `numpy`. Poniżej przedstawiono kod funkcji, która oblicza wartości **MACD** oraz **SIGNAL** na podstawie danych wejściowych.
+Implementacja wskaźnika **MACD** w języku Python została przeprowadzona przy użyciu biblioteki `pandas` oraz `numpy`. 
+Poniżej przedstawiono kod funkcji, która oblicza wartości **MACD** oraz **SIGNAL** na podstawie danych wejściowych.
 
 Impelemntacja funkcji obliczającej wartość *EMA* - wykładniczej średniej kroczącej:
 ```python

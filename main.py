@@ -27,9 +27,6 @@ def extract_data():
 
     return data_from_file
 
-data = extract_data()
-print(data) # Print the datas
-
 def plot_data(data):
     plt.figure(figsize=(28, 7))
     plt.plot(data['Zamkniecie'], label='Closing Prices', color='black')
@@ -39,8 +36,6 @@ def plot_data(data):
     plt.legend()
     # save_plot('graphs/closing_prices.png')
     plt.show()
-
-plot_data(data)
 
 def calculate_ema(_data, _n):
     """
@@ -123,7 +118,6 @@ def calculate_macd(_data, n1=12, n2=26):
     macd_values = np.array(macd_values)
     return macd_values
 
-
 def calculate_signal(_macd, n3=9):
     """
     Calculate the Signal Line of the MACD
@@ -144,12 +138,13 @@ def calculate_signal(_macd, n3=9):
 
 def plot_macd_and_signal(macd, signal):
     plt.figure(figsize=(28, 7))
-    plt.plot(macd, label='MACD', color='red')
-    plt.plot(signal, label='Signal Line', color='blue')
+    plt.plot(macd, label='MACD', color='blue')
+    plt.plot(signal, label='Signal Line', color='red')
     plt.xlabel('Time')
     plt.ylabel('Value')
     plt.title('MACD and Signal Line')
     plt.legend()
+    # save_plot("graphs/macd_and_signal.png")
     plt.show()
 
 def plot_histogram(macd, signal):
@@ -161,6 +156,7 @@ def plot_histogram(macd, signal):
     plt.ylabel('Value')
     plt.title('Histogram')
     plt.legend()
+    # save_plot("graphs/histogram.png")
     plt.show()
 
 def cross(macd, signal):
@@ -183,13 +179,14 @@ def cross(macd, signal):
 
 def plot_macd_signal_and_cross_points(macd, signal, cross_points):
     plt.figure(figsize=(28, 7))
-    plt.plot(macd, label='MACD', color='red')
-    plt.plot(signal, label='Signal Line', color='blue')
+    plt.plot(macd, label='MACD', color='blue')
+    plt.plot(signal, label='Signal Line', color='red')
     plt.scatter([point[0] for point in cross_points], [point[1] for point in cross_points], color='green', marker='o', label='Cross Points')
     plt.xlabel('Time')
     plt.ylabel('Value')
     plt.title('MACD, Signal Line, and Cross Points')
     plt.legend()
+    # save_plot("graphs/macd_signal_cross_points.png")
     plt.show()
 
 def calculate_buy_sell_signals(macd, signal):
@@ -228,8 +225,8 @@ def plotting_buy_sell_signals(macd, signal, buy_signals, sell_signals):
     sell_signals : list of tuples containing the index and value of the sell signals
     """
     plt.figure(figsize=(28, 7))
-    plt.plot(macd, label='MACD', color='red', linewidth=1, linestyle='--')
-    plt.plot(signal, label='Signal Line', color='blue', linewidth=1, linestyle='--')
+    plt.plot(macd, label='MACD', color='blue', linewidth=1, linestyle='--')
+    plt.plot(signal, label='Signal Line', color='red', linewidth=1, linestyle='--')
     plt.scatter([point[0] for point in buy_signals], [point[1] for point in buy_signals], color='green', marker='o',
                 label='Buy Signals')
     plt.scatter([point[0] for point in sell_signals], [point[1] for point in sell_signals], color='yellow', marker='o',
@@ -238,8 +235,13 @@ def plotting_buy_sell_signals(macd, signal, buy_signals, sell_signals):
     plt.ylabel('Value')
     plt.title('MACD, Signal Line, and Cross Points')
     plt.legend()
+    # save_plot("graphs/macd_signal_buy_sell_signals.png")
     plt.show()
 
+data = extract_data()
+print(data) # Print the datas
+
+plot_data(data)
 
 # Extract the 'Zamkniecie' column
 closing_prices = data['Zamkniecie'].values
@@ -277,7 +279,8 @@ for value in signal:
     print(float(value))
 print("Length of signal",len(signal))
 
-macd=macd[:len(signal)]
+# to make macd and signal the same length
+macd = macd[len(macd) - len(signal):]
 
 # Calculate the cross points
 cross_points = cross(macd, signal)
