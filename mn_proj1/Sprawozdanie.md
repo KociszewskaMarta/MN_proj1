@@ -84,41 +84,41 @@ Wskaźnik **MACD** jest używany do identyfikacji trendów rynkowych, sygnałów
 Warto zaznaczyć, że wskaźnik **MACD** nie jest wskaźnikiem samym w sobie, ale jedynie narzędziem, które należy interpretować w kontekście innych wskaźników i analizy rynkowej.   
 Wskaźnik **MACD** jest jednym z wielu narzędzi analizy technicznej, które mogą być wykorzystane do analizy rynku finansowego.  
   
-Wykres 3.1 przedstawia wartości **MACD** oraz **SIGNAL** dla indeksu WIG20 w okresie od 2020-10-01 do 2025-03-12.   
+Wykres 4.1 przedstawia wartości **MACD** oraz **SIGNAL** dla indeksu WIG20 w okresie od 2020-10-01 do 2025-03-12.   
 ![[macd_and_signal.png]]
-<small>Wykres 3.1. Wykres MACD przy użyciu zaimplementowanych funkcji</small>  
+<small>Wykres 4.1. Wykres MACD przy użyciu zaimplementowanych funkcji</small>  
 
-Aby zweryfikować poprawność implementacji wskaźnika MACD, do sprawozdania dołączono również wykres 3.2 przedstawiający wykres MACD obliczony przy użyciu oprogramowania *MATLAB*, korzystając z funkcji `macd` pochodzącej z pakietu *Financial Toolbox*. Dzięki temu możliwe jest porównanie wyników obu metod i ocena zgodności uzyskanych rezultatów.
+Aby zweryfikować poprawność implementacji wskaźnika MACD, do sprawozdania dołączono również wykres 4.2 przedstawiający wykres MACD obliczony przy użyciu oprogramowania *MATLAB*, korzystając z funkcji `macd` pochodzącej z pakietu *Financial Toolbox*. Dzięki temu możliwe jest porównanie wyników obu metod i ocena zgodności uzyskanych rezultatów.
 
-Wykres 3.2 przedstawia wartości **MACD** oraz **SIGNAL**  dla indeksu WIG20 w okresie od 2020-10-01 do 2025-03-12 obliczone przy użyciu *MATLAB* i funkcji `macd`.
+Wykres 4.2 przedstawia wartości **MACD** oraz **SIGNAL**  dla indeksu WIG20 w okresie od 2020-10-01 do 2025-03-12 obliczone przy użyciu *MATLAB* i funkcji `macd`.
 
 ![[macd_plot_by_matlab.png]]
-<small>Wykres 3.2. Wykres MACD przy użyciu oprogramowania MATLAB</small>
+<small>Wykres 4.2. Wykres MACD przy użyciu oprogramowania MATLAB</small>
 
 Histogram **MACD** to graficzna reprezentacja różnicy między linią MACD a linią sygnałową. Pokazuje on dynamikę zmian siły trendu oraz momenty, w których może dojść do odwrócenia kierunku cen. Histogram jest obliczany jako:
 $$ \text{Histogram MACD = MACD line - SIGNAL line}$$
 Gdy wartości histogramu są dodatnie, oznacza to, że linia MACD znajduje się powyżej linii sygnałowej, co może wskazywać na przewagę trendu wzrostowego. Natomiast wartości ujemne sugerują, że linia MACD jest poniżej linii sygnałowej, co może oznaczać trend spadkowy. Wzrosty i spadki słupków histogramu pozwalają również ocenić siłę zmian cen oraz potencjalne punkty odwrócenia trendu.
 
-Wykres 3.3 przedstawia histogram wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31.  
+Wykres 4.3 przedstawia histogram wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31.  
 
 ![[histogram.png]]
-<small>Wykres 3.3. Histogram</small>  
+<small>Wykres 4.3. Histogram</small>  
 
 Wskaźnik **MACD** oraz jego linia sygnałowa są często analizowane poprzez ich wzajemne przecięcia, które dostarczają istotnych informacji na temat możliwych zmian trendu. Analiza tych przecięć pomaga w identyfikacji momentów wejścia i wyjścia z rynku oraz w ocenie siły trendu.
 
-Wykres 3.4 przedstawia wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31, wraz z zaznaczonymi momentami, w których krzywa **SIGNAL** przecina krzywą **MACD**.  
+Wykres 4.4 przedstawia wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31, wraz z zaznaczonymi momentami, w których krzywa **SIGNAL** przecina krzywą **MACD**.  
 
 ![[macd_signal_cross_points.png]]
-<small>Wykres 3.4</small>  
+<small>Wykres 4.4 Wykres MACD i SIGNAL z zaznaczonymi punktami przecięcia</small>  
 
 Gdy **MACD** przecina linię **SIGNAL** od dołu, jest to uznawane za **sygnał kupna**, sugerujący, że trend wzrostowy może nabierać na sile. Natomiast gdy **MACD** przecina linię **SIGNAL** od góry, oznacza to **sygnał sprzedaży**, co może wskazywać na osłabienie trendu wzrostowego i potencjalny ruch spadkowy.
 
-Wskazane są momenty kupna, kiedy krzywa **MACD** przecina krzywą **SIGNAL** od dołu oraz sprzedaży, kiedy krzywa **MACD** przecina krzywą **SIGNAL** od góry.  
+Wykres 4.5 przedstawia wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31, wraz z zaznaczonymi sygnałami kupna i sprzedaży.  
+
 Sygnał kupna został oznaczony kolorem zielonym, sygnał sprzedaży - kolorem czerwonym.  
 
-
 ![[macd_signal_buy_sell_points.png]]
-<small>Wykres 3.5</small>  
+<small>Wykres 4.5 Wykres MACD i SIGNAL z zaznaczonymi sygnałami kupna i sprzedaży</small>  
   
 ### **5. Analiza przykładowych transakcji i prezentacja problemów ze wskaźnikiem MACD**  
 
@@ -150,7 +150,6 @@ Podobnie jak w poprzednim przykładzie, linie **MACD** i **SIGNAL** przecinają 
 - Inwestor, który reagowałby na te sygnały, mógłby szybko kupić i sprzedać, nie osiągając zysku, ponieważ po każdej transakcji kurs powraca do poziomu wyjściowego lub zmienia się minimalnie.
 - Fałszywe sygnały są widoczne szczególnie w miejscach, gdzie nie ma wyraźnego kierunku – rynek porusza się w trendzie bocznym (konsolidacja).
 
-
 **Dlaczego pojawiają się fałszywe sygnały?**
 
 Fałszywe sygnały są powszechne podczas konsolidacji lub niskiej zmienności, ponieważ MACD reaguje na drobne zmiany w cenach, co prowadzi do wielokrotnych przecięć linii MACD i Signal. To z kolei generuje sygnały kupna i sprzedaży, które nie są poparte rzeczywistymi zmianami trendu.
@@ -171,12 +170,18 @@ Wykres 5.3 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla st
 ![[macd_signal_buy_sell_points_for__2024-01-01_2024-01-31.png]]
 <small>Wykres 5.3 Wykres MACD i SIGNAL dla 01.2024</small>  
 
+**Dlaczego pojawia się opóźnienie sygnałów?**
+
 Opóźnienie to wynika z natury MACD, który bazuje na średnich kroczących (domyślnie 12-dniowa i 26-dniowa). Średnie te są opóźnionymi wskaźnikami, więc dopiero po kilku dniach wyraźnego ruchu generują sygnał.
 
 W tym okresie na wykresie można zauważyć trend spadkowy, a sygnał sprzedaży (czerwony trójkąt) pojawia się z opóźnieniem:
 
 - **Trend spadkowy** zaczyna się wcześniej, ale sygnał sprzedaży jest generowany dopiero po zauważalnym spadku cen.
 - Inwestor, który czekał na przecięcie MACD i linii sygnału, nie sprzedałby aktywów na szczycie, lecz już po częściowym zrealizowaniu spadku.
-    
 
+**Jak ograniczyć wpływ opóźnionych sygnałów?**
+
+1. **Zastosowanie filtrów trendów**: Połączenie MACD z innymi wskaźnikami, może pomóc wyeliminować opóźnione sygnały w okresach konsolidacji. 
+2. **Zastosowanie krótszych okresów dla średnich**: Użycie szybszych parametrów dla średnich wykładniczych (np. 6, 13, 26) może zmniejszyć opóźnienie sygnałów generowanych przez MACD, ale może również zwiększyć liczbę fałszywych sygnałów. Ważne jest, aby balansować szybkość sygnałów z ich wiarygodnością.
+3. **Wykorzystanie analizy wolumenu**: Opóźnione sygnały mogą być bardziej wiarygodne, jeśli pojawiają się z dużym wolumenem obrotu. Obserwowanie zmian w wolumenie obrotu może pomóc ocenić siłę sygnału MACD, zmniejszając wpływ opóźnionych i słabszych sygnałów.
 

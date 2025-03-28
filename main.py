@@ -46,8 +46,8 @@ def plot_data(data):
     plt.ylabel('Cena zamknięcia (PLN)')
     plt.title('Wykres giełdowy dla WIG20 2020-10-01 - 2025-03-12', fontsize=20)
     plt.legend()
-    save_plot('graphs/closing_prices.png')
-    plt.show()
+    # save_plot('graphs/closing_prices.png')
+    # plt.show()
 
 def calculate_ema(_data, _n):
     """
@@ -161,8 +161,8 @@ def plot_macd_and_signal(data, macd, signal):
     # plt.ylabel('Value')
     plt.title('Wykres MACD / SIGNAL dla WIG20', fontsize=20)
     plt.legend()
-    save_plot("graphs/macd_and_signal.png")
-    plt.show()
+    # save_plot("graphs/macd_and_signal.png")
+    # plt.show()
 
 def plot_histogram(data, macd, signal):
     histogram = macd[:len(signal)] - signal
@@ -177,8 +177,8 @@ def plot_histogram(data, macd, signal):
     plt.ylabel('Wartość MACD')
     plt.title('Histogram MACD dla WIG20', fontsize=20)
     plt.legend()
-    save_plot("graphs/histogram.png")
-    plt.show()
+    # save_plot("graphs/histogram.png")
+    # plt.show()
 
 def cross(macd, signal):
     """
@@ -217,8 +217,8 @@ def plot_macd_signal_and_cross_points(data, macd, signal, cross_points):
     # plt.ylabel('Value')
     plt.title('Wykres MACD / SIGNAL dla WIG20 z zaznaczonymi punktami przecięcia', fontsize=20)
     plt.legend()
-    save_plot("graphs/macd_signal_cross_points.png")
-    plt.show()
+    # save_plot("graphs/macd_signal_cross_points.png")
+    # plt.show()
 
 def calculate_buy_sell_signals(macd, signal):
     """
@@ -266,8 +266,8 @@ def plotting_buy_sell_signals(data, macd, signal, buy_signals, sell_signals):
     # plt.ylabel('Value')
     plt.title('Wykres MACD / SIGNAL dla WIG20 z zaznaczonymi sygnałami kupna i sprzedaży', fontsize=20)
     plt.legend()
-    save_plot("graphs/macd_signal_buy_sell_points.png")
-    plt.show()
+    # save_plot("graphs/macd_signal_buy_sell_points.png")
+    # plt.show()
 
 def save_plot_with_dates(filename, start_date, end_date):
     """
@@ -317,8 +317,8 @@ def plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, 
     plt.title(
         f'Wykres MACD / SIGNAL dla WIG20 dla okresu od {starting_date.strftime("%Y-%m-%d")} do {ending_date.strftime("%Y-%m-%d")}', fontsize=20)
     plt.legend()
-    save_plot_with_dates("graphs/macd_signal_buy_sell_points_for_", starting_date.strftime('%Y-%m-%d'), ending_date.strftime('%Y-%m-%d'))
-    plt.show()
+    # save_plot_with_dates("graphs/macd_signal_buy_sell_points_for_", starting_date.strftime('%Y-%m-%d'), ending_date.strftime('%Y-%m-%d'))
+    # plt.show()
 
 data = extract_data()
 print(data) # Print the datas

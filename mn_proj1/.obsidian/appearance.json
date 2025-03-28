@@ -1,4 +1,7 @@
 {
-  "baseFontSize": 16,
-  "baseFontSizeAction": true
+  "baseFontSize": 17,
+  "baseFontSizeAction": true,
+  "enabledCssSnippets": [
+    "pdf-justified"
+  ]
 }
