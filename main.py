@@ -3,7 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-# TODO change plots so they have dates on x-axis
 
 def save_plot(filename):
     """
@@ -33,8 +32,8 @@ def extract_data():
     return data_from_file
 
 def plot_data(data):
-    plt.figure(figsize=(28, 7))
-    plt.plot(data['Data'], data['Zamkniecie'], label='Closing Prices', color='black')
+    plt.figure(figsize=(28, 10))
+    plt.plot(data['Data'], data['Zamkniecie'], label='Ceny zamknięcia', color='black')
 
     # Set the x-axis to display dates only at the start of each month
     plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
@@ -43,11 +42,11 @@ def plot_data(data):
     # Rotate the x-axis labels to be vertical
     plt.xticks(rotation=90)
 
-    plt.xlabel('Time')
-    plt.ylabel('Value')
-    plt.title('Closing Prices')
+    plt.xlabel('Data')
+    plt.ylabel('Cena zamknięcia (PLN)')
+    plt.title('Wykres giełdowy dla WIG20 2020-10-01 - 2025-03-12', fontsize=20)
     plt.legend()
-    # save_plot('graphs/closing_prices.png')
+    save_plot('graphs/closing_prices.png')
     plt.show()
 
 def calculate_ema(_data, _n):
@@ -149,27 +148,36 @@ def calculate_signal(_macd, n3=9):
 
     return signal_line
 
-def plot_macd_and_signal(macd, signal):
-    plt.figure(figsize=(28, 7))
-    plt.plot(macd, label='MACD', color='blue')
-    plt.plot(signal, label='Signal Line', color='red')
-    plt.xlabel('Time')
-    plt.ylabel('Value')
-    plt.title('MACD and Signal Line')
+def plot_macd_and_signal(data, macd, signal):
+    plt.figure(figsize=(28, 10))
+    plt.plot(data['Data'][-len(macd):], macd, label='MACD', color='blue')
+    plt.plot(data['Data'][-len(signal):], signal, label='Signal Line', color='red')
+
+    plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    plt.xticks(rotation=90)
+
+    plt.xlabel('Data')
+    # plt.ylabel('Value')
+    plt.title('Wykres MACD / SIGNAL dla WIG20', fontsize=20)
     plt.legend()
-    # save_plot("graphs/macd_and_signal.png")
+    save_plot("graphs/macd_and_signal.png")
     plt.show()
 
-def plot_histogram(macd, signal):
-    # Calculate the histogram
+def plot_histogram(data, macd, signal):
     histogram = macd[:len(signal)] - signal
-    plt.figure(figsize=(28, 7))
-    plt.bar(range(len(histogram)), histogram, label='Histogram', color='green', alpha=1)
-    plt.xlabel('Time')
-    plt.ylabel('Value')
-    plt.title('Histogram')
+    plt.figure(figsize=(28, 10))
+    plt.bar(data['Data'][-len(histogram):], histogram, label='Histogram', color='green', alpha=1)
+
+    plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    plt.xticks(rotation=90)
+
+    plt.xlabel('Data')
+    plt.ylabel('Wartość MACD')
+    plt.title('Histogram MACD dla WIG20', fontsize=20)
     plt.legend()
-    # save_plot("graphs/histogram.png")
+    save_plot("graphs/histogram.png")
     plt.show()
 
 def cross(macd, signal):
@@ -190,16 +198,26 @@ def cross(macd, signal):
             cross_points.append((i, macd[i]))
     return cross_points
 
-def plot_macd_signal_and_cross_points(macd, signal, cross_points):
-    plt.figure(figsize=(28, 7))
-    plt.plot(macd, label='MACD', color='blue')
-    plt.plot(signal, label='Signal Line', color='red')
-    plt.scatter([point[0] for point in cross_points], [point[1] for point in cross_points], color='green', marker='o', label='Cross Points')
-    plt.xlabel('Time')
-    plt.ylabel('Value')
-    plt.title('MACD, Signal Line, and Cross Points')
+
+def plot_macd_signal_and_cross_points(data, macd, signal, cross_points):
+    plt.figure(figsize=(28, 10))
+    plt.plot(data['Data'][-len(macd):], macd, label='MACD', color='blue')
+    plt.plot(data['Data'][-len(signal):], signal, label='Signal Line', color='red')
+
+    cross_dates = [data['Data'].iloc[-len(macd) + point[0]] for point in cross_points]
+    cross_values = [point[1] for point in cross_points]
+
+    plt.scatter(cross_dates, cross_values, color='green', marker='o', label='Cross Points')
+
+    plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    plt.xticks(rotation=90)
+
+    plt.xlabel('Data')
+    # plt.ylabel('Value')
+    plt.title('Wykres MACD / SIGNAL dla WIG20 z zaznaczonymi punktami przecięcia', fontsize=20)
     plt.legend()
-    # save_plot("graphs/macd_signal_cross_points.png")
+    save_plot("graphs/macd_signal_cross_points.png")
     plt.show()
 
 def calculate_buy_sell_signals(macd, signal):
@@ -227,28 +245,79 @@ def calculate_buy_sell_signals(macd, signal):
             sell_signals.append((i, macd[i]))
     return buy_signals, sell_signals
 
-def plotting_buy_sell_signals(macd, signal, buy_signals, sell_signals):
+def plotting_buy_sell_signals(data, macd, signal, buy_signals, sell_signals):
+    plt.figure(figsize=(28, 10))
+    plt.plot(data['Data'][-len(macd):], macd, label='MACD', color='blue', linewidth=1, linestyle='--')
+    plt.plot(data['Data'][-len(signal):], signal, label='Signal Line', color='red', linewidth=1, linestyle='--')
+
+    buy_dates = [data['Data'].iloc[-len(macd) + point[0]] for point in buy_signals]
+    buy_values = [point[1] for point in buy_signals]
+    sell_dates = [data['Data'].iloc[-len(macd) + point[0]] for point in sell_signals]
+    sell_values = [point[1] for point in sell_signals]
+
+    plt.scatter(buy_dates, buy_values, color='green', marker='^', label='Buy Signals')
+    plt.scatter(sell_dates, sell_values, color='red', marker='v', label='Sell Signals')
+
+    plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    plt.xticks(rotation=90)
+
+    plt.xlabel('Data')
+    # plt.ylabel('Value')
+    plt.title('Wykres MACD / SIGNAL dla WIG20 z zaznaczonymi sygnałami kupna i sprzedaży', fontsize=20)
+    plt.legend()
+    save_plot("graphs/macd_signal_buy_sell_points.png")
+    plt.show()
+
+def save_plot_with_dates(filename, start_date, end_date):
     """
-    Plot the MACD, Signal Line, Buy Signals, and Sell Signals
+    Save the plot as a PNG file with dates in the filename
     Parameters
     ----------
-    macd : numpy array of MACD values
-    signal : numpy array of Signal Line values
-    buy_signals : list of tuples containing the index and value of the buy signals
-    sell_signals : list of tuples containing the index and value of the sell signals
+    filename : str, the base filename to save the plot as
+    start_date : str, the start date to include in the filename
+    end_date : str, the end date to include in the filename
     """
-    plt.figure(figsize=(28, 7))
-    plt.plot(macd, label='MACD', color='blue', linewidth=1, linestyle='--')
-    plt.plot(signal, label='Signal Line', color='red', linewidth=1, linestyle='--')
-    plt.scatter([point[0] for point in buy_signals], [point[1] for point in buy_signals], color='green', marker='^',
-                label='Buy Signals')
-    plt.scatter([point[0] for point in sell_signals], [point[1] for point in sell_signals], color='red', marker='v',
-                label='Sell Signals')
-    plt.xlabel('Time')
-    plt.ylabel('Value')
-    plt.title('MACD, Signal Line, and Cross Points')
+    formatted_filename = f"{filename}_{start_date}_{end_date}.png"
+    plt.savefig(formatted_filename)
+
+def plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, starting_date, ending_date):
+    starting_date = pd.to_datetime(starting_date)
+    ending_date = pd.to_datetime(ending_date)
+
+    # Filter the data for the given period
+    mask = (data['Data'] >= starting_date) & (data['Data'] <= ending_date)
+    filtered_data = data.loc[mask]
+
+    # Calculate the indices for the filtered data
+    start_idx = data.index.get_loc(filtered_data.index[0])
+    end_idx = data.index.get_loc(filtered_data.index[-1]) + 1
+
+    # Filter the MACD and Signal values for the given period
+    filtered_macd = macd[start_idx:end_idx]
+    filtered_signal = signal[start_idx:end_idx]
+
+    plt.figure(figsize=(28, 10))
+    plt.plot(filtered_data['Data'], filtered_macd, label='MACD', color='blue', linewidth=1, linestyle='--')
+    plt.plot(filtered_data['Data'], filtered_signal, label='Signal Line', color='red', linewidth=1, linestyle='--')
+
+    buy_dates = [data['Data'].iloc[point[0]] for point in buy_signals if starting_date <= data['Data'].iloc[point[0]] <= ending_date]
+    buy_values = [point[1] for point in buy_signals if starting_date <= data['Data'].iloc[point[0]] <= ending_date]
+    sell_dates = [data['Data'].iloc[point[0]] for point in sell_signals if starting_date <= data['Data'].iloc[point[0]] <= ending_date]
+    sell_values = [point[1] for point in sell_signals if starting_date <= data['Data'].iloc[point[0]] <= ending_date]
+
+    plt.scatter(buy_dates, buy_values, color='green', marker='^', label='Buy Signals')
+    plt.scatter(sell_dates, sell_values, color='red', marker='v', label='Sell Signals')
+
+    plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    plt.xticks(rotation=90)
+
+    plt.xlabel('Data')
+    plt.title(
+        f'Wykres MACD / SIGNAL dla WIG20 dla okresu od {starting_date.strftime("%Y-%m-%d")} do {ending_date.strftime("%Y-%m-%d")}', fontsize=20)
     plt.legend()
-    # save_plot("graphs/macd_signal_buy_sell_signals.png")
+    save_plot_with_dates("graphs/macd_signal_buy_sell_points_for_", starting_date.strftime('%Y-%m-%d'), ending_date.strftime('%Y-%m-%d'))
     plt.show()
 
 data = extract_data()
@@ -300,20 +369,25 @@ macd = macd[len(macd) - len(signal):]
 cross_points = cross(macd, signal)
 
 # plot the data
-plot_macd_and_signal(macd, signal)
+plot_macd_and_signal(data, macd, signal)
 
 # Plot the histogram on a different graph
-plot_histogram(macd, signal)
+plot_histogram(data, macd, signal)
 
 # Plot the MACD, Signal Line, and Cross Points
-plot_macd_signal_and_cross_points(macd, signal, cross_points)
+plot_macd_signal_and_cross_points(data, macd, signal, cross_points)
 
 # Calculate the buy and sell signals
 buy_signals, sell_signals = calculate_buy_sell_signals(macd, signal)
 
 # Plot the MACD, Signal Line, Buy Signals, and Sell Signals
-plotting_buy_sell_signals(macd, signal, buy_signals, sell_signals)
+plotting_buy_sell_signals(data, macd, signal, buy_signals, sell_signals)
 
+plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2021-02-01', '2021-03-15')
+
+plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2023-07-01', '2023-08-31')
+
+plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2024-01-01', '2024-01-31')
 
 
 
