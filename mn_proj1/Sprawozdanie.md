@@ -73,7 +73,10 @@ $$
 SIGNAL = EMA_9 (MACD)  
 \tag{4}  
 $$  
-  ----
+  
+Wskaźnik został zaimplementowany w języku Python z wykorzystaniem bibliotek pandas oraz matplotlib. Wykorzystano wzór (1) do obliczenia *EMA*
+
+----
 ### **4. Interpretacja wskaźnika MACD**  
   
 Wskaźnik **MACD** jest używany do identyfikacji trendów rynkowych, sygnałów kupna i sprzedaży oraz do analizy zmienności cen. Podstawowe zasady interpretacji wskaźnika **MACD**:  
@@ -100,7 +103,6 @@ $$ \text{Histogram MACD = MACD line - SIGNAL line}$$
 Gdy wartości histogramu są dodatnie, oznacza to, że linia MACD znajduje się powyżej linii sygnałowej, co może wskazywać na przewagę trendu wzrostowego. Natomiast wartości ujemne sugerują, że linia MACD jest poniżej linii sygnałowej, co może oznaczać trend spadkowy. Wzrosty i spadki słupków histogramu pozwalają również ocenić siłę zmian cen oraz potencjalne punkty odwrócenia trendu.
 
 Wykres 4.3 przedstawia histogram wartości **MACD** oraz **SIGNAL** w okresie od 2020-10-01 do 2020-12-31.  
-
 ![[histogram.png]]
 <small>Wykres 4.3. Histogram</small>  
 
@@ -122,12 +124,12 @@ Sygnał kupna został oznaczony kolorem zielonym, sygnał sprzedaży - kolorem c
   
 ### **5. Analiza przykładowych transakcji i prezentacja problemów ze wskaźnikiem MACD**  
 
-#### **Analiza przykładowych transackcji**
+#### **Analiza przykładowych transakcji**
 
-Na podstawie wykresu 4.5 MACD i SIGNAL dla WIG20, można wskazać kilka okresów, w których MACD dobrze sygnalizował momenty kupna i sprzedaży.
+Na podstawie wykresu 4.5 **MACD i SIGNAL** dla WIG20, można przeprowadzić analizę kilka okresów, w których **MACD** sygnalizował momenty kupna i sprzedaży.
 
 Wykres 5.1 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla okresu od października 2020 roku do stycznia 2021 roku. 
-Pod koniec października na wykresie widzimy pierwszy sygnał sprzedaży. Ten sygnał zbiega się z początkiem trendu spadkowego, co potwierdza spadek wartości **MACD** poniżej linii **SIGNAL**. W połowie listopada pojawia się sygnał kupna, który przewiduje tren wzrostowy. W okolicach połowy listopada pojawia się kolejny sygnał sprzedaży, który zapowiada korektę trendu. W pod koniec grudnia pojawia się sygnał kupna, po którym następuje mocny trend wzrostowy. Następnie pojawia się sygnał sprzedaży, który zapowiada korektę trendu. Pod koniec stycznia ponownie pojawia się kolejny sygnał kupna
+Pod koniec października na wykresie widzimy pierwszy sygnał sprzedaży. Ten sygnał zbiega się z początkiem trendu spadkowego, co potwierdza spadek wartości **MACD** poniżej linii **SIGNAL**. W połowie listopada pojawia się sygnał kupna, który przewiduje tren wzrostowy. Później pojawia się kolejny sygnał sprzedaży, a pod koniec grudnia pojawia się sygnał kupna. Następnie pojawia się sygnał sprzedaży, który zapowiada korektę trendu. Pod koniec stycznia ponownie pojawia się kolejny sygnał kupna
 
 ![[macd_signal_buy_sell_points_for__2020-10-01_2021-01-31.png]]
 <small>Wykres 5.1 Wykres MACD i SIGNAL dla okresu 10.2020-01.2021</small>   
@@ -151,7 +153,7 @@ Pod koniec października na wykresie widzimy pierwszy sygnał sprzedaży. Ten sy
 - **Łączny wynik:** 242,88 + 21,83 + 183,56 + 69,7 - 88,02 = 429,95
 
 Wykres 5.2 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla okresu od czerwca 2022 roku do września 2022 roku. 
-Pierwszy sygnał kupna pojawił się na początku czerwca, po czym nastąpił wzrost wartości **MACD**, co wskazywało na trend wzrostowy. Następnie w okolicach początku lipca pojawił się sygnał sprzedaży, po którym rzeczywiście nastąpił trend spadkowy – **MACD** opadał poniżej linii **SIGNAL**. Pod koniec sierpnia pojawiło się kilka sygnałów kupna i sprzedaży w krótkim odstępie czasu, co może wskazywać na okres konsolidacji, w którym brak było wyraźnego trendu. Natomiast ostatni sygnał kupna w sierpniu wyraźnie zapoczątkował silny trend wzrostowy, co pokazuje, że wskaźnik **MACD** w tym przypadku skutecznie zidentyfikował punkt zwrotny na rynku i wyznaczył odbicie ceny.
+Pierwszy sygnał kupna pojawił się na początku czerwca, po czym nastąpił wzrost wartości **MACD**, co wskazywało na trend wzrostowy. Następnie w okolicach początku lipca pojawił się sygnał sprzedaży, po którym rzeczywiście nastąpił trend spadkowy – **MACD** opadał poniżej linii **SIGNAL**. Pod koniec lipca wystąpił kolejny sygnał kupna. Pod koniec sierpnia pojawiło się kilka sygnałów kupna i sprzedaży w krótkim odstępie czasu, co może wskazywać na okres konsolidacji, w którym brak było wyraźnego trendu. Natomiast ostatni sygnał kupna w sierpniu wyraźnie zapoczątkował silny trend wzrostowy, co pokazuje, że wskaźnik **MACD** w tym przypadku skutecznie zidentyfikował punkt zwrotny na rynku i wyznaczył odbicie ceny.
 
 ![[macd_signal_buy_sell_points_for__2022-06-01_2022-09-30.png]]
 <small>Wykres 5.2 Wykres MACD i SIGNAL dla okresu 06.2022-09.2022</small>   
@@ -173,9 +175,9 @@ Pierwszy sygnał kupna pojawił się na początku czerwca, po czym nastąpił wz
 
 **Podsumowanie:**
 - **Łączny wynik:** -178,11 + 29,44 - 19,39 - 85,52 = -253,58
-
 #### **Wnioski**
 Wyniki analizy pokazują, że skuteczność MACD w generowaniu zysków jest zmienna i zależy od konkretnego okresu rynkowego. W niektórych okresach, jak ten z 2020-10 do 2021-01, MACD generował sygnały, które mogły przynieść zysk. W innych okresach, jak ten z 2022-06 do 2022-09, sygnały MACD prowadziły do strat. Analiza potwierdza, że MACD, podobnie jak inne wskaźniki analizy technicznej, nie gwarantuje zysków. 
+
 #### **Problemy ze wskaźnikiem MACD**
 
 Podczas używania wskaźnika MACD (*Moving Average Convergence Divergence*) mogą pojawić się różne problemy związane z interpretacją sygnałów i jego ograniczeniami. Są to między innymi:
@@ -184,10 +186,10 @@ Podczas używania wskaźnika MACD (*Moving Average Convergence Divergence*) mog�
 - **MACD** czasem generuje sygnały kupna lub sprzedaży, które okazują się nietrafione, szczególnie na rynku o niskiej zmienności lub podczas konsolidacji.
 - Przykład: Wskaźnik może zasugerować sygnał kupna (przecięcie linii MACD od dołu przez linię sygnału), ale cena aktywa nie rośnie, co prowadzi do strat.
 
-Wykres 5.3 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla okresu od lutego 2021 roku do kwietnia 2021 roku. W analizowanym przedziale czasowym można zaobserwować brak wyraźnego trendu, co prowadzi do tzw. konsolidacji rynkowej. W efekcie przecięcia linii **MACD** i **SIGNAL** występują wielokrotnie w krótkich odstępach czasu, co generuje liczne sygnały kupna i sprzedaży. Niestety, żaden z tych sygnałów nie jest poparty dynamiczną zmianą cen, co sprawia, że mają one charakter fałszywy.
+Wykres 5.3 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla okresu od lutego 2021 roku do połowy marca 2021 roku. W analizowanym przedziale czasowym można zaobserwować brak wyraźnego trendu, co prowadzi do tzw. konsolidacji rynkowej. W efekcie przecięcia linii **MACD** i **SIGNAL** występują wielokrotnie w krótkich odstępach czasu, co generuje liczne sygnały kupna i sprzedaży. Niestety, żaden z tych sygnałów nie jest poparty dynamiczną zmianą cen, co sprawia, że mają one charakter fałszywy.
 
 ![[macd_signal_buy_sell_points_for__2021-02-01_2021-03-15.png]]
-<small>Wykres 5.3 Wykres MACD i SIGNAL dla okresu 02.2021-04.2021</small>   
+<small>Wykres 5.3 Wykres MACD i SIGNAL dla okresu 02.2021-03.2021</small>   
 
 Widać kilka miejsc, gdzie pojawiają się sygnały kupna (zielone trójkąty) i sprzedaży (czerwone trójkąty), ale zmiany te nie prowadzą do silnych trendów.
 
@@ -212,7 +214,7 @@ Fałszywe sygnały są powszechne podczas konsolidacji lub niskiej zmienności, 
 
 **Jak ograniczyć wpływ fałszywych sygnałów?**
 
-1. **Filtracja sygnałów**: Stosowanie dodatkowych wskaźników, np. RSI, które mogą wskazać, czy rynek jest wykupiony lub wyprzedany.
+1. **Filtracja sygnałów**: Stosowanie dodatkowych wskaźników.
 2. **Wydłużenie okresu MACD**: Zmiana parametrów MACD (np. 9, 21, 50) może zmniejszyć liczbę fałszywych sygnałów, choć kosztem opóźnień.
 3. **Analiza trendu**: Unikanie sygnałów MACD w okresach konsolidacji i korzystanie z niego głównie podczas wyraźnych trendów wzrostowych lub spadkowych.
 
@@ -221,21 +223,16 @@ Fałszywe sygnały są powszechne podczas konsolidacji lub niskiej zmienności, 
 - **MACD** opiera się na średnich kroczących, które są wskaźnikami opóźnionymi. Oznacza to, że sygnał może pojawić się dopiero po rozpoczęciu nowego trendu, co zmniejsza potencjalne zyski.
 - Przykład: Jeśli rynek szybko zmienia kierunek, wskaźnik może reagować za późno, gdy znacząca część ruchu cenowego już się dokonała.
 
-Wykres 5.6 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla okresu od 2021-01-15 do 2021-02-04. Analiza tego przedziału czasowego uwidacznia istotną cechę wskaźnika MACD, jaką jest opóźnienie sygnału w stosunku do rzeczywistych zmian trendu. W omawianym okresie można zauważyć, że sygnał sprzedaży generowane przez przecięcie linii **MACD** i **SIGNAL** pojawiają się z pewnym opóźnieniem w stosunku do momentu faktycznej zmiany kierunku ruchu cen na rynku. 
+Wykres 5.5 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla okresu od 2021-01-15 do 2021-02-04. Analiza tego przedziału czasowego uwidacznia istotną cechę wskaźnika MACD, jaką jest opóźnienie sygnału w stosunku do rzeczywistych zmian trendu. W omawianym okresie można zauważyć, że sygnał sprzedaży generowane przez przecięcie linii **MACD** i **SIGNAL** pojawiają się z pewnym opóźnieniem w stosunku do momentu faktycznej zmiany kierunku ruchu cen na rynku. 
 
 ![[macd_signal_buy_sell_points_for__2021-01-15_2021-02-04.png]]
-<small>Wykres 5.6 Wykres MACD i SIGNAL dla 01.2024</small>  
+<small>Wykres 5.5 Wykres MACD i SIGNAL dla okresu 01.2021 - 02.2021</small>  
 
 **MACD** zarekomendował kupno akcji po cenie 1986.06 zł oraz sprzedaż po cenie 1967.22 zł prowadząc do straty na poziomie 18.84 zł. Nie jest to duża strata, jednak stanowi przykład na to, że **MACD** nie nie zawsze działa niezawodnie. 
 
 **Dlaczego pojawia się opóźnienie sygnałów?**
 
 Opóźnienie to wynika z natury MACD, który bazuje na średnich kroczących (domyślnie 12-dniowa i 26-dniowa). Średnie te są opóźnionymi wskaźnikami, więc dopiero po kilku dniach wyraźnego ruchu generują sygnał.
-
-W tym okresie na wykresie można zauważyć trend spadkowy, a sygnał sprzedaży (czerwony trójkąt) pojawia się z opóźnieniem:
-
-- **Trend spadkowy** zaczyna się wcześniej, ale sygnał sprzedaży jest generowany dopiero po zauważalnym spadku cen.
-- Inwestor, który czekał na przecięcie MACD i linii sygnału, nie sprzedałby aktywów na szczycie, lecz już po częściowym zrealizowaniu spadku.
 
 **Jak ograniczyć wpływ opóźnionych sygnałów?**
 
@@ -245,16 +242,13 @@ W tym okresie na wykresie można zauważyć trend spadkowy, a sygnał sprzedaży
 
 ### **5. Podsumowanie**  
 
+Analiza badanego wskaźnika wykazała, że jego skuteczność nie jest jednoznaczna – w zależności od warunków i okoliczności rynkowych przynosił zarówno zyski, jak i straty. Oznacza to, że nie można go traktować jako niezawodnego narzędzia prognostycznego, a jego interpretacja powinna uwzględniać dodatkowe czynniki wpływające na wynik końcowy.
 
-Wskaźnik **MACD** (*Moving Average Convergence Divergence*) jest popularnym narzędziem analizy technicznej, które może pomóc w identyfikacji trendów i potencjalnych punktów zwrotnych na rynku. Jednak jego skuteczność nie jest stuprocentowa, a stosowanie go bez dodatkowej analizy może prowadzić do strat.
+Potencjalna opłacalność – **MACD** może dostarczać sygnały pozwalające na osiąganie zysków, zwłaszcza gdy jest stosowany w silnych trendach. Przecięcie linii sygnałowej może wskazywać momenty wejścia i wyjścia z rynku. Gdy **WIG20** znajduje się w wyraźnym trendzie wzrostowym lub spadkowym – wtedy sygnały przecięcia linii **MACD** i sygnałowej mogą wskazywać dobre momenty kupna/sprzedaży. W okresach silnej zmienności, gdy **MACD** wyraźnie oddziela trend wzrostowy od spadkowego.
 
-1. **Potencjalna opłacalność** – MACD może dostarczać sygnały pozwalające na osiąganie zysków, zwłaszcza gdy jest stosowany w silnych trendach. Przecięcie linii sygnałowej może wskazywać momenty wejścia i wyjścia z rynku.
-    
-2. **Fałszywe sygnały** – W okresach konsolidacji (braku wyraźnego trendu) wskaźnik MACD może generować błędne sygnały kupna i sprzedaży, co może prowadzić do strat.
-    
-3. **Opóźnienie sygnałów** – Ponieważ MACD bazuje na średnich kroczących, jego sygnały są często opóźnione w stosunku do rzeczywistych zmian cen. Może to skutkować wejściem w pozycję zbyt późno, gdy większa część ruchu już się wydarzyła.
-    
-4. **Sposoby poprawy skuteczności** – Aby zwiększyć trafność decyzji inwestycyjnych, MACD warto stosować w połączeniu z innymi narzędziami analizy technicznej, takimi jak wskaźnik RSI, poziomy wsparcia i oporu oraz analiza wolumenu. Dodatkowo filtrowanie sygnałów na wyższych interwałach czasowych może pomóc uniknąć błędnych decyzji.
-    
+Jednak w okresach konsolidacji, gdy indeks **WIG20** porusza się w wąskim zakresie – wtedy **MACD** może generować fałszywe sygnały kupna i sprzedaży, co może prowadzić do strat. Ponieważ MACD bazuje na średnich kroczących, jego sygnały są często opóźnione w stosunku do rzeczywistych zmian cen. Może to skutkować wejściem w pozycję zbyt późno, gdy większa część ruchu już się wydarzyła.
 
-Podsumowując, MACD może być skutecznym narzędziem, ale jego sygnały powinny być zawsze weryfikowane za pomocą dodatkowych metod analizy, aby zminimalizować ryzyko strat i zwiększyć szanse na zysk.
+Analiza wskaźnika MACD w kontekście WIG20 wskazuje, że jest on bardziej przydatny w inwestycjach długoterminowych niż krótkoterminowych. Jego sygnały lepiej odzwierciedlają zmiany w długofalowych trendach, co pozwala na identyfikację korzystnych momentów wejścia i wyjścia z rynku. W krótkim terminie MACD może generować fałszywe sygnały, szczególnie w okresach konsolidacji, co zwiększa ryzyko nietrafionych decyzji inwestycyjnych. Dlatego stosowanie go jako narzędzia do strategii długoterminowych wydaje się bardziej opłacalne.
+
+Podsumowując, MACD może być skutecznym narzędziem, ale jego sygnały powinny być zawsze weryfikowane za pomocą dodatkowych metod analizy, aby zminimalizować ryzyko strat i zwiększyć szanse na zysk. Jego skuteczność nie jest stuprocentowa, a stosowanie go bez dodatkowej analizy może prowadzić do strat. Wymaga ostrożnego stosowania i uwzględnienia kontekstu rynkowego. Inwestorzy powinni łączyć analizę techniczną z fundamentalną i stosować zasady zarządzania ryzykiem, aby zwiększyć szanse na sukces.
+

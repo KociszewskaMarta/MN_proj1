@@ -69,7 +69,7 @@ def calculate_ema(_data, _n):
 
     Returns
     -------
-    numpy array of EMA values
+    array of EMA values
     should return values for each data point in the given period
     """
     alpha = 2 / (_n + 1)  # Calculate the smoothing factor alpha, 2/(N+1)
