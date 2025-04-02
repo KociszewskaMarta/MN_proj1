@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "a53b641433489388",
+        "id": "fbb5a0e315a1bf13",
         "type": "tabs",
         "children": [
           {
-            "id": "83cc00eab303119d",
+            "id": "dd678c18ab310ce1",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
+    "width": 467.5,
     "collapsed": true
   },
   "right": {
@@ -169,28 +169,29 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "83cc00eab303119d",
+  "active": "dd678c18ab310ce1",
   "lastOpenFiles": [
+    "graphs/macd_signal_buy_sell_points_for__2021-01-15_2021-02-04.png.~tmp",
+    "graphs/macd_signal_buy_sell_points_for__2021-01-15_2021-02-04.png",
     "graphs/macd_signal_buy_sell_points_for__2023-07-01_2023-08-31.png",
     "Sprawozdanie.md",
+    "graphs/macd_signal_buy_sell_points_for__2023-10-01_2023-12-31.png.~tmp",
+    "graphs/macd_signal_buy_sell_points_for__2020-10-01_2021-01-31.png.~tmp",
     "graphs/macd_signal_buy_sell_points_for__2021-02-01_2021-03-15.png",
     "graphs/macd_signal_cross_points.png.~tmp",
     "graphs/macd_signal_buy_sell_points_for__2024-01-01_2024-01-31.png.~tmp",
     "graphs/macd_signal_buy_sell_points_for__2023-10-01_2024-01-31.png.~tmp",
-    "graphs/macd_signal_buy_sell_points_for__2023-10-01_2023-12-31.png.~tmp",
     "graphs/macd_signal_buy_sell_points_for__2023-07-01_2023-08-31.png.~tmp",
     "graphs/macd_signal_buy_sell_points_for__2022-06-01_2022-09-30.png.~tmp",
     "graphs/macd_signal_buy_sell_points_for__2021-02-01_2021-03-15.png.~tmp",
     "graphs/macd_signal_buy_sell_points.png.~tmp",
     "graphs/macd_plot_by_matlab.png.~tmp",
-    "graphs/macd_and_signal.png.~tmp",
     "graphs/macd_signal_buy_sell_points_for__2023-10-01_2023-12-31.png",
     "graphs/macd_signal_buy_sell_points_for__2023-10-01_2024-01-31.png",
     "graphs/macd_signal_buy_sell_points_for__2022-06-01_2022-09-30.png",
     "graphs/macd_signal_buy_sell_points_for__2020-10-01_2021-01-31.png",
     "graphs/macd_signal_buy_sell_points_for__2024-01-01_2024-01-31.png",
     "graphs/macd_signal_buy_sell_points_for__2023-11-01_2024-01-31.png",
-    "graphs/macd_signal_buy_sell_points_for__2021-02-01_2021-04-30.png",
-    "graphs/macd_signal_buy_sell_points_for__2023-05-01_2023-08-31.png"
+    "graphs/macd_signal_buy_sell_points_for__2021-02-01_2021-04-30.png"
   ]
 }

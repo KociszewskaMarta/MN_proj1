@@ -221,10 +221,12 @@ Fałszywe sygnały są powszechne podczas konsolidacji lub niskiej zmienności, 
 - **MACD** opiera się na średnich kroczących, które są wskaźnikami opóźnionymi. Oznacza to, że sygnał może pojawić się dopiero po rozpoczęciu nowego trendu, co zmniejsza potencjalne zyski.
 - Przykład: Jeśli rynek szybko zmienia kierunek, wskaźnik może reagować za późno, gdy znacząca część ruchu cenowego już się dokonała.
 
-Wykres 5.6 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla stycznia 2024 roku. Analiza tego przedziału czasowego uwidacznia istotną cechę wskaźnika MACD, jaką jest opóźnienie sygnału w stosunku do rzeczywistych zmian trendu. W omawianym okresie można zauważyć, że sygnał sprzedaży generowane przez przecięcie linii **MACD** i **SIGNAL** pojawiają się z pewnym opóźnieniem w stosunku do momentu faktycznej zmiany kierunku ruchu cen na rynku. 
+Wykres 5.6 przedstawia sygnał **MACD** oraz linię sygnału (**SIGNAL**) dla okresu od 2021-01-15 do 2021-02-04. Analiza tego przedziału czasowego uwidacznia istotną cechę wskaźnika MACD, jaką jest opóźnienie sygnału w stosunku do rzeczywistych zmian trendu. W omawianym okresie można zauważyć, że sygnał sprzedaży generowane przez przecięcie linii **MACD** i **SIGNAL** pojawiają się z pewnym opóźnieniem w stosunku do momentu faktycznej zmiany kierunku ruchu cen na rynku. 
 
-![[macd_signal_buy_sell_points_for__2024-01-01_2024-01-31.png]]
+![[macd_signal_buy_sell_points_for__2021-01-15_2021-02-04.png]]
 <small>Wykres 5.6 Wykres MACD i SIGNAL dla 01.2024</small>  
+
+**MACD** zarekomendował kupno akcji po cenie 1986.06 zł oraz sprzedaż po cenie 1967.22 zł prowadząc do straty na poziomie 18.84 zł. Nie jest to duża strata, jednak stanowi przykład na to, że **MACD** nie nie zawsze działa niezawodnie. 
 
 **Dlaczego pojawia się opóźnienie sygnałów?**
 
@@ -241,3 +243,18 @@ W tym okresie na wykresie można zauważyć trend spadkowy, a sygnał sprzedaży
 2. **Zastosowanie krótszych okresów dla średnich**: Użycie szybszych parametrów dla średnich wykładniczych (np. 6, 13, 26) może zmniejszyć opóźnienie sygnałów generowanych przez MACD, ale może również zwiększyć liczbę fałszywych sygnałów. Ważne jest, aby balansować szybkość sygnałów z ich wiarygodnością.
 3. **Wykorzystanie analizy wolumenu**: Opóźnione sygnały mogą być bardziej wiarygodne, jeśli pojawiają się z dużym wolumenem obrotu. Obserwowanie zmian w wolumenie obrotu może pomóc ocenić siłę sygnału MACD, zmniejszając wpływ opóźnionych i słabszych sygnałów.
 
+### **5. Podsumowanie**  
+
+
+Wskaźnik **MACD** (*Moving Average Convergence Divergence*) jest popularnym narzędziem analizy technicznej, które może pomóc w identyfikacji trendów i potencjalnych punktów zwrotnych na rynku. Jednak jego skuteczność nie jest stuprocentowa, a stosowanie go bez dodatkowej analizy może prowadzić do strat.
+
+1. **Potencjalna opłacalność** – MACD może dostarczać sygnały pozwalające na osiąganie zysków, zwłaszcza gdy jest stosowany w silnych trendach. Przecięcie linii sygnałowej może wskazywać momenty wejścia i wyjścia z rynku.
+    
+2. **Fałszywe sygnały** – W okresach konsolidacji (braku wyraźnego trendu) wskaźnik MACD może generować błędne sygnały kupna i sprzedaży, co może prowadzić do strat.
+    
+3. **Opóźnienie sygnałów** – Ponieważ MACD bazuje na średnich kroczących, jego sygnały są często opóźnione w stosunku do rzeczywistych zmian cen. Może to skutkować wejściem w pozycję zbyt późno, gdy większa część ruchu już się wydarzyła.
+    
+4. **Sposoby poprawy skuteczności** – Aby zwiększyć trafność decyzji inwestycyjnych, MACD warto stosować w połączeniu z innymi narzędziami analizy technicznej, takimi jak wskaźnik RSI, poziomy wsparcia i oporu oraz analiza wolumenu. Dodatkowo filtrowanie sygnałów na wyższych interwałach czasowych może pomóc uniknąć błędnych decyzji.
+    
+
+Podsumowując, MACD może być skutecznym narzędziem, ale jego sygnały powinny być zawsze weryfikowane za pomocą dodatkowych metod analizy, aby zminimalizować ryzyko strat i zwiększyć szanse na zysk.
