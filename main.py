@@ -32,6 +32,16 @@ def extract_data():
     return data_from_file
 
 def plot_data(data):
+    """
+    Plot the data
+    Parameters
+    ----------
+    data
+
+    Returns
+    -------
+
+    """
     plt.figure(figsize=(28, 10))
     plt.plot(data['Data'], data['Zamkniecie'], label='Ceny zamknięcia', color='black')
 
@@ -149,6 +159,18 @@ def calculate_signal(_macd, n3=9):
     return signal_line
 
 def plot_macd_and_signal(data, macd, signal):
+    """
+    Plot the MACD and Signal Line
+    Parameters
+    ----------
+    data
+    macd
+    signal
+
+    Returns
+    -------
+
+    """
     plt.figure(figsize=(28, 10))
     plt.plot(data['Data'][-len(macd):], macd, label='MACD', color='blue')
     plt.plot(data['Data'][-len(signal):], signal, label='Signal Line', color='red')
@@ -165,6 +187,18 @@ def plot_macd_and_signal(data, macd, signal):
     # plt.show()
 
 def plot_histogram(data, macd, signal):
+    """
+
+    Parameters
+    ----------
+    data
+    macd
+    signal
+
+    Returns
+    -------
+
+    """
     histogram = macd[:len(signal)] - signal
     plt.figure(figsize=(28, 10))
     plt.bar(data['Data'][-len(histogram):], histogram, label='Histogram', color='green', alpha=1)
@@ -200,6 +234,19 @@ def cross(macd, signal):
 
 
 def plot_macd_signal_and_cross_points(data, macd, signal, cross_points):
+    """
+    Plot the MACD, Signal Line, and Cross Points
+    Parameters
+    ----------
+    data
+    macd
+    signal
+    cross_points
+
+    Returns
+    -------
+
+    """
     plt.figure(figsize=(28, 10))
     plt.plot(data['Data'][-len(macd):], macd, label='MACD', color='blue')
     plt.plot(data['Data'][-len(signal):], signal, label='Signal Line', color='red')
@@ -246,6 +293,20 @@ def calculate_buy_sell_signals(macd, signal):
     return buy_signals, sell_signals
 
 def plotting_buy_sell_signals(data, macd, signal, buy_signals, sell_signals):
+    """
+    Plot the MACD, Signal Line,Buy Signals, and Sell Signals
+    Parameters
+    ----------
+    data
+    macd
+    signal
+    buy_signals
+    sell_signals
+
+    Returns
+    -------
+
+    """
     plt.figure(figsize=(28, 10))
     plt.plot(data['Data'][-len(macd):], macd, label='MACD', color='blue', linewidth=1, linestyle='--')
     plt.plot(data['Data'][-len(signal):], signal, label='Signal Line', color='red', linewidth=1, linestyle='--')
@@ -282,6 +343,22 @@ def save_plot_with_dates(filename, start_date, end_date):
     plt.savefig(formatted_filename)
 
 def plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, starting_date, ending_date):
+    """
+    Plot the MACD, Signal Line, Buy Signals, and Sell Signals for a given period
+    Parameters
+    ----------
+    data
+    macd
+    signal
+    buy_signals
+    sell_signals
+    starting_date
+    ending_date
+
+    Returns
+    -------
+
+    """
     starting_date = pd.to_datetime(starting_date)
     ending_date = pd.to_datetime(ending_date)
 
@@ -309,6 +386,16 @@ def plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, 
     plt.scatter(buy_dates, buy_values, color='green', marker='^', label='Buy Signals')
     plt.scatter(sell_dates, sell_values, color='red', marker='v', label='Sell Signals')
 
+    # Add text for buy signals
+    for date, value in zip(buy_dates, buy_values):
+        closing_price = data.loc[data['Data'] == date, 'Zamkniecie'].values[0]
+        plt.text(date, value, f'{closing_price:.2f}', color='green', fontsize=10, ha='center', va='bottom')
+
+    # Add text for sell signals
+    for date, value in zip(sell_dates, sell_values):
+        closing_price = data.loc[data['Data'] == date, 'Zamkniecie'].values[0]
+        plt.text(date, value, f'{closing_price:.2f}', color='red', fontsize=10, ha='center', va='top')
+
     plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
     plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
     plt.xticks(rotation=90)
@@ -317,9 +404,13 @@ def plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, 
     plt.title(
         f'Wykres MACD / SIGNAL dla WIG20 dla okresu od {starting_date.strftime("%Y-%m-%d")} do {ending_date.strftime("%Y-%m-%d")}', fontsize=20)
     plt.legend()
-    # save_plot_with_dates("graphs/macd_signal_buy_sell_points_for_", starting_date.strftime('%Y-%m-%d'), ending_date.strftime('%Y-%m-%d'))
-    # plt.show()
+    save_plot_with_dates("graphs/macd_signal_buy_sell_points_for_", starting_date.strftime('%Y-%m-%d'), ending_date.strftime('%Y-%m-%d'))
+    plt.show()
 
+# ---------------------------------------------------
+# Main code
+
+# Extract the data
 data = extract_data()
 print(data) # Print the datas
 
@@ -328,40 +419,12 @@ plot_data(data)
 # Extract the 'Zamkniecie' column
 closing_prices = data['Zamkniecie'].values
 
-# # Calculate the EMA_26
-# ema26 = calculate_ema(closing_prices, 26)
-#
-# # Calculate the EMA_12
-# ema12 = calculate_ema(closing_prices, 12)
-
-# Print the EMA values as regular floats
-# for value in ema26:
-#     print(float(value))
-# print(len(ema26))
-
-# for value in ema12:
-#     print(float(value))
-# print(len(ema12))
-
 # Calculate the MACD
 macd = calculate_macd(closing_prices)
-
-# Print the MACD values as regular floats
-print("MACD values:")
-for value in macd:
-    print(float(value))
-print("Length of macd",len(macd))
 
 # Calculate the Signal Line
 signal = calculate_signal(macd)
 
-# Print the Signal Line values as regular floats
-print("Signal values:")
-for value in signal:
-    print(float(value))
-print("Length of signal",len(signal))
-
-# TODO find a correct way to make macd and signal the same length
 # to make macd and signal the same length
 macd = macd[len(macd) - len(signal):]
 
@@ -383,11 +446,19 @@ buy_signals, sell_signals = calculate_buy_sell_signals(macd, signal)
 # Plot the MACD, Signal Line, Buy Signals, and Sell Signals
 plotting_buy_sell_signals(data, macd, signal, buy_signals, sell_signals)
 
+# Plot the MACD, Signal Line, Buy Signals, and Sell Signals for a given period
 plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2021-02-01', '2021-03-15')
 
 plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2023-07-01', '2023-08-31')
 
 plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2024-01-01', '2024-01-31')
+
+plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2020-10-01', '2021-01-31')
+
+plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2022-06-01', '2022-09-30')
+
+plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2023-10-01', '2023-12-31')
+
 
 
 
