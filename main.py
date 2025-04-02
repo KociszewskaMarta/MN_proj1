@@ -396,8 +396,8 @@ def plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, 
         closing_price = data.loc[data['Data'] == date, 'Zamkniecie'].values[0]
         plt.text(date, value, f'{closing_price:.2f}', color='red', fontsize=10, ha='center', va='top')
 
-    plt.gca().xaxis.set_major_locator(mdates.MonthLocator())
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m'))
+    plt.gca().xaxis.set_major_locator(mdates.DayLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     plt.xticks(rotation=90)
 
     plt.xlabel('Data')
@@ -458,6 +458,8 @@ plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell
 plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2022-06-01', '2022-09-30')
 
 plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2023-10-01', '2023-12-31')
+
+plotting_buy_sell_signals_for_given_period(data, macd, signal, buy_signals, sell_signals, '2021-01-15', '2021-02-04')
 
 
 
